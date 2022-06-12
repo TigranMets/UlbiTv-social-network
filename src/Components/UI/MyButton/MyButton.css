@@ -1,0 +1,13 @@
+.myButton {
+    padding: 5px 15px;
+    color: teal;
+    font-size: 14px;
+    background: transparent;
+    border: 1px solid teal;
+    cursor: pointer;
+}    
+
+.currentPage {
+    border: 2px solid orange;
+    font-weight: bold;
+}
