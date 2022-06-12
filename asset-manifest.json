@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/UlbiTv-social-network/static/css/main.3ef3bce2.css",
+    "main.js": "/UlbiTv-social-network/static/js/main.08431af8.js",
+    "index.html": "/UlbiTv-social-network/index.html",
+    "main.3ef3bce2.css.map": "/UlbiTv-social-network/static/css/main.3ef3bce2.css.map",
+    "main.08431af8.js.map": "/UlbiTv-social-network/static/js/main.08431af8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3ef3bce2.css",
+    "static/js/main.08431af8.js"
+  ]
+}
