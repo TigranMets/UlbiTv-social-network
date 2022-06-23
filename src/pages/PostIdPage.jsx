@@ -24,8 +24,6 @@ const PostIdPage = () => {
         fetchComments(params.id);
     }, []);
 
-    debugger;
-
     return (
         <div>
             <h1>You are in the post page with id {params.id}.</h1>
@@ -39,10 +37,11 @@ const PostIdPage = () => {
                 isCommentLoading
                     ? <Loader />
                     : <div>
-                        {Comments.map(comm => <div>
+                        {Comments.map(comm => <div key={comm.id}>
                             <h5>{comm.name}</h5>
                             <span>{comm.body}</span>
-                        </div>)}
+                        </div>)
+                        }
                     </div>
             }
         </div>

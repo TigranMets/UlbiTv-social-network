@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-debugger;
+// debugger;
 
 export default class PostService {
     static async getAll(limit = 10, page = 1) {

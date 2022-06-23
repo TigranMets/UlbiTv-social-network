@@ -1,11 +1,11 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/App.css';
 import MyButton from './MyButton/MyButton';
 
 const PostItem = (props) => {
     debugger;
-    const router = useHistory();
+    const navigate = useNavigate();
     return (
         <div className='post'>
             <div className='post__content'>
@@ -15,11 +15,12 @@ const PostItem = (props) => {
                 </div>
             </div>
             <div className='post__btns'>
-                <MyButton onClick={() => router.push(`/posts/${props.post.id}`)}>Open</MyButton>
+                <MyButton onClick={() => navigate(`/posts/${props.post.id}`, { replace: true })}>Open</MyButton>
                 <MyButton onClick={() => props.remove(props.post)}>Delete</MyButton>
             </div>
         </div>
     );
 }
+
 
 export default PostItem;
