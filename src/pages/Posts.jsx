@@ -54,10 +54,11 @@ function Posts() {
       {postError &&
         <h1>Some error occurred ${postError}</h1>
       }
-      {isPostsLoading
-        ? <Loader />
-        : <PostList posts={sortedAndSearchedPosts} remove={removePost} title='Posts about jS' />}
-        <Pagination page={page} totalPages={totalPages} changePage={changePage}/>
+      <PostList posts={sortedAndSearchedPosts} remove={removePost} title='Posts about jS' />
+      {isPostsLoading &&
+        <Loader />
+      }
+      <Pagination page={page} totalPages={totalPages} changePage={changePage} />
     </div>
   );
 }
