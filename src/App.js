@@ -17,7 +17,7 @@ function App() {
       setIsAuth(true);
     }
   }, []);
-  debugger;
+
   return (
     <div>
       <AuthContext.Provider value={{

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PostService from '../API/PostService';
 import Loader from '../Components/UI/Loader/Loader';
 import MyButton from '../Components/UI/MyButton/MyButton';
@@ -6,8 +6,9 @@ import MyModal from '../Components/UI/MyModal/MyModal';
 import Pagination from '../Components/UI/Pagination/Pagination';
 import PostFilter from '../Components/UI/PostFilter';
 import PostForm from '../Components/UI/PostForm';
-import PostList from '../Components/UI/PostList';
+import PostList from '../Components/UI/PostList/PostList';
 import { useFetching } from '../hooks/useFetching';
+import { useObserver } from '../hooks/useObserver';
 import { usePosts } from '../hooks/usePosts';
 import { getPageCount } from '../utils/pages';
 
@@ -19,15 +20,21 @@ function Posts() {
   const [page, setPage] = useState(1);
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+  const lastElement = useRef();
+  console.log(lastElement);
   const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
     const response = await PostService.getAll(limit, page);
-    setPosts(response.data);
+    setPosts([...posts, ...response.data]);
     const totalCount = response.headers['x-total-count'];
     setTotalPages(getPageCount(totalCount, limit));
   });
 
+  useObserver(lastElement, isPostsLoading, page < totalPages, () => {
+    setPage(page + 1);
+  })
+
   useEffect(() => {
-    fetchPosts();
+    fetchPosts(limit, page);
   }, [page]);
 
   let createPost = (newPost) => {
@@ -39,13 +46,8 @@ function Posts() {
     setPosts(posts.filter(p => p.id !== post.id));
   }
 
-  const changePage = (page) => {
-    setPage(page);
-  }
-
   return (
     <div className='posts'>
-      <MyButton onClick={fetchPosts}>GET POSTS</MyButton>
       <MyButton style={{ marginTop: 30 }} onClick={() => setModal(true)}>Create post</MyButton>
       <MyModal visible={modal} setVisible={setModal}>
         <PostForm create={createPost} />
@@ -58,7 +60,7 @@ function Posts() {
       {isPostsLoading &&
         <Loader />
       }
-      <Pagination page={page} totalPages={totalPages} changePage={changePage} />
+      <div ref={lastElement} style={{ height: 100, backgroundColor: 'red' }}></div>
     </div>
   );
 }

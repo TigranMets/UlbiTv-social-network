@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../App';
 import MyButton from '../MyButton/MyButton';
-import s from './Navbar.module.css';
+import styles from './Navbar.module.css';
 
 const Navbar = () => {
 
@@ -16,9 +16,9 @@ const Navbar = () => {
     }
 
     return (
-        <div className={s.navbar}>
+        <div className={styles.navbar}>
             <MyButton onClick={logOut}>Log out</MyButton>
-            <div className={s.navbarLinks}>
+            <div className={styles.navbarLinks}>
                 <NavLink to='/posts'>Posts</NavLink>
                 <NavLink to='/about'>About</NavLink>
             </div>
